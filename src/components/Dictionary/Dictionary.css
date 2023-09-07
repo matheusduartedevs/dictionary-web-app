@@ -1,0 +1,55 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+}
+
+.input {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    border: 2px solid black;
+    border-radius: 8px;
+    width: 50vh;
+    height: 40px;
+}
+
+.word {
+    font-weight: 600;
+    font-size: 45px;
+}
+
+.pronunciation {
+    position: relative;
+    bottom: 30px;
+    color: rgb(151, 21, 168);
+}
+
+.class {
+    margin-right: 10px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.class-word {
+    display: flex;
+    align-items: center;
+}
+
+.side-line {
+    flex-grow: 1;
+    border-top: 1px solid black;
+    margin: 0;
+}
+
+.meaning {
+    color: grey;
+}
+
+.source {
+    color: grey;
+}
+
+a {
+    text-decoration: none;
+}
