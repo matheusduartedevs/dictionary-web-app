@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './Dictionary.css'
 
 const Dictionary = () => {
+  const [userWord, setUserWord] = useState('')
   const [word, setWord] = useState('')
   const [phonetics, setPhonectis] = useState('')
   const [partsOfSpeechNoun, setPartsOfSpeechNoun] = useState([])
@@ -12,17 +13,13 @@ const Dictionary = () => {
 
   const fetchData = async () => {
     try {
-      await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/church')
+      await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${userWord}`)
         .then(res => res.json())
         .then(data => {
-          console.log(data[0].word)
           setWord(data[0].word)
-          console.log(data[0].phonetics[1].text)
           setPhonectis(data[0].phonetics[1].text)
-          console.log(data[0].meanings[0].partOfSpeech)
           setPartsOfSpeechNoun(data[0].meanings[0].partOfSpeech)
           setPartsOfSpeechVerb(data[0].meanings[1].partOfSpeech)
-          console.log(data[0].meanings[0].definitions[0].definition)
           setDefinitionNoun(data[0].meanings[0].definitions[0].definition)
           setDefinitionVerb(data[0].meanings[1].definitions[0].definition)
           setSource(data[0].sourceUrls)
@@ -32,13 +29,19 @@ const Dictionary = () => {
     }
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+  }
+
   useEffect(() => {
     fetchData()
   }, [])
 
   return (
     <main className="main">
-      <input type="text" placeholder='Type the word' className='input' />
+      <form onSubmit={handleSubmit}>
+        <input type="text" placeholder='Type the word' className='input' value={userWord} onChange={(e) => setUserWord(e.target.value)} />
+      </form>
 
       <div className="word-area">
         <h2 className="word">{word}</h2>
